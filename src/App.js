@@ -1,24 +1,44 @@
-import logo from './logo.svg';
+import { useEffect, useState } from "react";
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        const calculateTimeLeft = () => {
+          const difference = +new Date("2023-03-07T10:00:00+00:00") - +new Date();
+          let timeLeft = {};
+
+          if (difference > 0) {
+            timeLeft = {
+              hours: Math.floor(difference / (1000 * 60 * 60)),
+              minutes: Math.floor((difference / 1000 / 60) % 60),
+              seconds: Math.floor((difference / 1000) % 60),
+            };
+          }
+      
+          return timeLeft;
+        };
+
+        const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+        useEffect(() => {
+          setTimeout(() => {
+            setTimeLeft(calculateTimeLeft());
+          }, 1000);
+        });
+
+        return (
+          <div className="App">
+           {timeLeft.hours || timeLeft.minutes || timeLeft.seconds ? (
+            <p>
+               <span>{timeLeft.hours}</span>
+               <span>:</span>
+               <span>{timeLeft.minutes}</span>
+               <span>:</span>
+               <span>{timeLeft.seconds}</span>
+            </p>
+        ) : (
+          <p>Time is up 🔥</p>
+        )}
+      </div>   
   );
 }
 
