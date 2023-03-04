@@ -31,6 +31,7 @@ function App() {
             <h3 align="center">Countdown Timer</h3>
             <h3 align="center">Hard Rock Hotel & Casino Tampa</h3>
             <h3 align="center">March 7, 2023</h3>
+            <img src="https://sunbizlocal.com/chk.jpg" width={300} height={300} />
            {timeLeft.hours || timeLeft.minutes || timeLeft.seconds ? (
             <p>
                <span>{timeLeft.hours}</span>
